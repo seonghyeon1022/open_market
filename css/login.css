@@ -1,0 +1,91 @@
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+header{
+    margin-top: 18rem;
+    margin-bottom: 7rem;
+}
+
+/* main */
+main {
+    display: flex;
+    flex-direction: column;
+}
+
+/* login-section */
+.login-section {
+    width: 55rem;
+    border: 1px solid #C4C4C4;
+    border-radius: 1rem;
+    padding: 0 3.5rem 3.6rem;
+}
+
+/* login-tabs */
+.login-tabs {
+    display: flex;
+    margin-bottom: 3.4rem;
+}
+
+.login-tabs button {
+    width: 100%;
+    padding: 2rem 7.7rem;
+    font-size: 1.8rem;
+    font-weight: 500;
+    border: 1px solid #C4C4C4;
+    border-radius: 1rem;
+    background: #f9f9f9;
+    cursor: pointer;
+}
+
+/* form */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+}
+
+form input {
+    border: none;
+    border-bottom: 1px solid #C4C4C4;
+    padding: 2rem 0 2rem;
+    text-align: left;
+    font-size: 1.6rem;
+}
+
+form button {
+    background: #21BF48;
+    color: #FFFFFF;
+    margin-top: 3.6rem;
+    padding: 1.9rem 0;
+
+    text-align: center;
+    font-size: 1.8rem;
+    font-weight: 700;
+
+    border: none;
+    border-radius: 0.5rem;
+    
+    cursor: pointer;
+}
+
+/* login-links */
+.login-links {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 3rem;
+    font-size: 1.6rem;
+    color: #333333;
+}
+
+.login-links li:last-child::before {
+    content: '|';
+    display: inline-block;
+    margin: 0 1.4rem;
+    color: #333333;
+    font-size: 1.6rem;
+}
