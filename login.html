@@ -15,26 +15,28 @@
         </h1>
     </header>
     <main>
-        <section>
-            <h2>로그인 화면</h2>
-            <ul>
+        <section class="login-section">
+            <h2 class="sr-only">로그인 화면</h2>
+            <ul class="login-tabs">
                 <li>
-                    <button>구매회원 로그인</button>
+                    <button type="button">구매회원 로그인</button>
                 </li>
                 <li>
-                    <button>판매회원 로그인</button>
+                    <button type="button">판매회원 로그인</button>
                 </li>
             </ul>
+
             <form action="#">
                 <label for="id">아이디 입력</label>
-                <input type="text" id="id" placeholder="아이디">
+                <input type="text" id="id" name="id" placeholder="아이디" required>
 
                 <label for="pw">비밀번호 입력</label>
-                <input type="password" id="pw" placeholder="비밀번호">
+                <input type="password" id="pw" name="pw" placeholder="비밀번호" required>
 
                 <button type="submit">로그인</button>
             </form>
-            <ul>
+
+            <ul class="login-links">
                 <li>
                     <a href="#none">회원가입</a>
                 </li>
