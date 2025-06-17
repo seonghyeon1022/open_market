@@ -75,6 +75,8 @@ main {
     font-size: 1.6rem;
     font-weight: 500;
     color: #EB5757;
+    margin: 2.6rem 0;
+
 }
 
 .login__form .error-message.show {
@@ -84,7 +86,6 @@ main {
 .login__form button {
     background: var(--main-color);
     color: #FFFFFF;
-    margin-top: 3.6rem;
     padding: 1.9rem 0;
 
     text-align: center;
