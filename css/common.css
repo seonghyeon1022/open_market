@@ -1,7 +1,8 @@
 /* common.css */
 :root {
-    --main-color: #000;
-    --sub-color: #767676;
+    --main-color: #21BF48;
+    --main-txt-color: #000000;
+    --sub-txt-color: #767676;
 }
 
 html {
@@ -10,7 +11,6 @@ html {
 
 body {
     font-family: 'Spoqa Han Sans Neo', sans-serif;
-    color: var(--main-color);
 }
 
 .sr-only {
@@ -23,4 +23,82 @@ body {
     clip: rect(0, 0, 0, 0);
     white-space: nowrap;
     border: 0;
+}
+
+/* gnb */
+.gnb {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 auto;
+    padding: 2rem 32rem;
+    border-bottom: 1px solid #eee;
+    box-shadow: 0 4px 4px -2px rgba(0, 0, 0, 0.1);
+
+}
+
+/* gnb__left */
+.gnb__left {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 3rem;
+}
+
+
+.gnb__logo img {
+    width: 12.4rem; 
+    aspect-ratio: 124/38;
+}
+
+.gnb__search-form {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 18.7rem;
+    border: 2px solid var(--main-color);
+    border-radius: 5rem;
+    padding: 0.9rem 2.2rem;
+}
+
+.gnb__search-form input {
+    border: none;
+    font-size: 1.6rem;
+}
+
+.gnb__search-form button {
+    background: none;
+    cursor: pointer;
+}
+
+.gnb__search-form img {
+    width: 2.8rem;
+    aspect-ratio: 1/1;
+}
+
+/* gnb__right */
+.gnb__right {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.gnb__menu {
+    display: flex;
+    gap: 2.6rem;
+}
+
+.gnb__menu-item a {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0.2rem;
+    color: var(--sub-txt-color);
+    font-size: 1.2rem;
+}
+
+.gnb__menu-item img {
+    width: 3.2rem;
+    aspect-ratio: 1/1;
 }
