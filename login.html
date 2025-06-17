@@ -10,26 +10,27 @@
     <title>HODU 로그인</title>
 </head>
 <body>
-    <header>
-        <h1>
+    <header class="login-header">
+        <h1 class="login-header__logo">
             <a href="./index.html">
                 <img src="./images/Logo-hodu.png" alt="HODU">
             </a>
         </h1>
     </header>
+
     <main>
-        <section class="login-section">
+        <section class="login__container">
             <h2 class="sr-only">로그인 화면</h2>
             <ul class="login-tabs">
-                <li>
+                <li class="login__tab-item">
                     <button type="button">구매회원 로그인</button>
                 </li>
-                <li>
+                <li class="login__tab-item">
                     <button type="button">판매회원 로그인</button>
                 </li>
             </ul>
 
-            <form action="#">
+            <form action="#" class="login__form">
                 <label for="id" class="sr-only">아이디 입력</label>
                 <input type="text" id="id" name="id" placeholder="아이디" required>
 
@@ -39,14 +40,15 @@
                 <button type="submit">로그인</button>
             </form>
         </section>
+
         <ul class="login-links">
-                <li>
-                    <a href="#none">회원가입</a>
-                </li>
-                <li>
-                    <a href="#none">비밀번호 찾기</a>
-                </li>
-            </ul>
+            <li class="login__link-item">
+                <a href="#none" class="link--signup">회원가입</a>
+            </li>
+            <li class="login__link-item">
+                <a href="#none" class="link--findpw">비밀번호 찾기</a>
+            </li>
+        </ul>
     </main>
 </body>
 </html>
