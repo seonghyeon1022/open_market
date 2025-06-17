@@ -2,8 +2,25 @@ const loginForm = document.querySelector('.login__form');
 const idInput = document.getElementById('id');
 const pwInput = document.getElementById('pw');
 const errorMessage = document.getElementById('loginError');
-
+const tabItems = document.querySelectorAll('.login__tab-item');
 const API_BASE = 'https://api.wenivops.co.kr/services/open-market';
+
+let currentUserType = 'BUYER';
+
+tabItems.forEach((tab, index) => {
+    tab.addEventListener('click', () => {
+        tabItems.forEach(t => t.classList.remove('active'));
+
+        tab.classList.add('active');
+
+        currentUserType = index === 0 ? 'BUYER' : 'SELLER';
+
+        idInput.value = '';
+        pwInput.value = '';
+        errorMessage.textContent = '';
+        errorMessage.classList.remove('show');
+    });
+});
 
 loginForm.addEventListener('submit', async function(e) {
     e.preventDefault();
