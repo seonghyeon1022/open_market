@@ -70,6 +70,17 @@ main {
     font-size: 1.6rem;
 }
 
+.login__form .error-message {
+    display: none;
+    font-size: 1.6rem;
+    font-weight: 500;
+    color: #EB5757;
+}
+
+.login__form .error-message.show {
+    display: block;
+}
+
 .login__form button {
     background: var(--main-color);
     color: #FFFFFF;
