@@ -3,52 +3,66 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    gap: 7rem;
 }
 
-header{
+/* header */
+.login-header {
     margin-top: 18rem;
-    margin-bottom: 7rem;
+}
+
+.login-header__logo img {
+    width: 23.8rem;
+    aspect-ratio: 238/74;
 }
 
 /* main */
 main {
     display: flex;
     flex-direction: column;
+    align-items: center;
 }
 
-/* login-section */
-.login-section {
+/* login__container */
+.login__container {
     width: 55rem;
     border: 1px solid #C4C4C4;
     border-radius: 1rem;
-    padding: 0 3.5rem 3.6rem;
 }
 
 /* login-tabs */
 .login-tabs {
     display: flex;
-    margin-bottom: 3.4rem;
 }
 
-.login-tabs button {
+.login__tab-item {
     width: 100%;
     padding: 2rem 7.7rem;
-    font-size: 1.8rem;
-    font-weight: 500;
     border: 1px solid #C4C4C4;
     border-radius: 1rem;
-    background: #f9f9f9;
+    background: #F2F2F2;
     cursor: pointer;
 }
 
-/* form */
-form {
+.login__tab-item.active {
+    background: #fff;
+    border-bottom: none;
+}
+
+.login__tab-item button {
+    font-size: 1.8rem;
+    font-weight: 500;
+}
+
+/* login__form */
+.login__form {
     display: flex;
     flex-direction: column;
     gap: 0.6rem;
+    padding: 3.4rem 3.5rem;
 }
 
-form input {
+.login__form input {
     border: none;
     border-bottom: 1px solid #C4C4C4;
     padding: 2rem 0 2rem;
@@ -56,8 +70,8 @@ form input {
     font-size: 1.6rem;
 }
 
-form button {
-    background: #21BF48;
+.login__form button {
+    background: var(--main-color);
     color: #FFFFFF;
     margin-top: 3.6rem;
     padding: 1.9rem 0;
@@ -82,7 +96,7 @@ form button {
     color: #333333;
 }
 
-.login-links li:last-child::before {
+.login__link-item:last-child::before {
     content: '|';
     display: inline-block;
     margin: 0 1.4rem;
