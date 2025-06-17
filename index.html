@@ -42,39 +42,50 @@
         </nav>
     </header>
     <main>
-        <section class="banner-section">
-            <h2>메인 이미지 슬라이더</h2>
-            <div class="slider-container">
-                <article>
-                    <h3>슬라이더 이미지</h3>
+        <section class="main-slider">
+            <h2 class="sr-only">메인 이미지 슬라이더</h2>
+            <div class="main-slider__wrapper">
+                <article class="main-slider__slide">
+                    <h3 class="sr-only">슬라이더 이미지</h3>
                 </article>
             </div>
 
-            <button>
+            <button class="main-slider__nav--prev">
                 <img src="./images/icon-swiper-1.svg" alt="이전 슬라이드">
             </button>
-            <button>
+            <button class="main-slider__nav--next">
                 <img src="./images/icon-swiper-2.svg" alt="다음 슬라이드">
             </button>
 
-            <nav>
-                <ul>
-                    <li><button></button></li>
-                    <li><button></button></li>
-                    <li><button></button></li>
-                    <li><button></button></li>
-                    <li><button></button></li>
+            <nav class="main-slider__pagination">
+                <ul class="main-slider__pagination-list">
+                    <li class="main-slider__pagination-item">
+                        <button></button>
+                    </li>
+                    <li class="main-slider__pagination-item">
+                        <button></button>
+                    </li>
+                    <li class="main-slider__pagination-item">
+                        <button></button>
+                    </li>
+                    <li class="main-slider__pagination-item">
+                        <button></button>
+                    </li>
+                    <li class="main-slider__pagination-item">
+                        <button></button>
+                    </li>
                 </ul>
             </nav>
         </section>
+
         <section class="products-section">
-            <h2>상품 목록</h2>
-            <div>
+            <h2 class="sr-only">상품 목록</h2>
+            <div class="product-card">
                 <a href="#none">
                     <img src="" alt="">
-                    <p>제조사</p>
-                    <h3>상품명</h3>
-                    <p>가격</p>
+                    <p class="product-card__brand">제조사</p>
+                    <h3 class="product-card__name">상품명</h3>
+                    <p class="product-card__price">가격</p>
                 </a>
             </div>
         </section>
