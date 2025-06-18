@@ -101,3 +101,26 @@ inputOrder.forEach((input, index) => {
         }
     });
 });
+
+const passwordInput = document.querySelector('#password');
+const passwordCheckIcon = passwordInput.closest('.input-wrapper').querySelector('.password-check');
+const passwordMessage = passwordInput.closest('.form-group').querySelector('.input-message');
+
+passwordInput.addEventListener('input', () => {
+    const pwd = passwordInput.value;
+
+    const minLength = pwd.length >= 8;
+    const hasLowercase = /[a-z]/.test(pwd);
+    const hasNumber = /\d/.test(pwd);
+
+    if (!(minLength && hasLowercase && hasNumber)) {
+        passwordMessage.textContent = '8자 이상, 영문 대 소문자, 숫자, 특수문자를 사용하세요.';
+        passwordMessage.style.color = '#EB5757';
+        passwordInput.style.borderColor = '#EB5757';
+        passwordCheckIcon.src = './images/icon-check-off.svg';
+    } else {
+        passwordMessage.textContent = '';
+        passwordInput.style.borderColor = '#21BF48';
+        passwordCheckIcon.src = './images/icon-check-on.svg';
+    }
+});
