@@ -24,21 +24,8 @@ body {
 /* Main */
 
 section {
-    max-width: 550px;
+    width: 55rem;
     margin: 0 auto;
-    padding: 0 35px;
-}
-
-section h2 {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    white-space: nowrap;
-    border: 0;
 }
 
 /* Sign Tabs */
