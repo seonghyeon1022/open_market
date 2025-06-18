@@ -18,15 +18,15 @@ checkBtn.addEventListener('click', async () => {
 
     if (!username) {
         inputMessage.textContent = '필수 정보입니다.';
-        inputMessage.style.color = 'red';
-        userIdInput.style.borderColor = 'red';
+        inputMessage.style.color = '#EB5757';
+        userIdInput.style.borderColor = '#EB5757';
         return;
     }
 
     if (!idRegex.test(username)) {
         inputMessage.textContent = '20자 이내의 영문 소문자, 대문자, 숫자만 사용 가능 합니다.';
-        inputMessage.style.color = 'red';
-        userIdInput.style.borderColor = 'red';
+        inputMessage.style.color = '#EB5757';
+        userIdInput.style.borderColor = '#EB5757';
         return;
     }
 
@@ -44,8 +44,8 @@ checkBtn.addEventListener('click', async () => {
 
     if (res.ok) {
         inputMessage.textContent = '멋진 아이디네요 :)';
-        inputMessage.style.color = 'green';
-        userIdInput.style.borderColor = 'green';
+        inputMessage.style.color = '#21BF48';
+        userIdInput.style.borderColor = '#21BF48';
     } else {
         if (data.error === '이미 사용 중인 아이디입니다.') {
         inputMessage.textContent = '이미 사용 중인 아이디입니다.';
@@ -53,14 +53,14 @@ checkBtn.addEventListener('click', async () => {
         inputMessage.textContent = '알 수 없는 오류가 발생했습니다.';
         }
 
-        inputMessage.style.color = 'red';
-        userIdInput.style.borderColor = 'red';
+        inputMessage.style.color = '#EB5757';
+        userIdInput.style.borderColor = '#EB5757';
     }
 
     } catch (err) {
         inputMessage.textContent = '서버 오류가 발생했습니다.';
-        inputMessage.style.color = 'red';
-        userIdInput.style.borderColor = 'red';
+        inputMessage.style.color = '#EB5757';
+        userIdInput.style.borderColor = '#EB5757';
         console.error('중복 확인 실패:', err);
     }
 });
