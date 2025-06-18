@@ -1,8 +1,66 @@
+const API_BASE = 'https://api.wenivops.co.kr/services/open-market';
+
 const tabItems = document.querySelectorAll('.sign__tab-item');
+const userIdInput = document.querySelector('#userId');
+const checkBtn = document.querySelector('.check-btn');
+const inputMessage = document.querySelector('#userId').closest('.form-group').querySelector('.input-message');
 
 tabItems.forEach((tab, index) => {
     tab.addEventListener('click', () => {
     tabItems.forEach(item => item.classList.remove('active'));
     tab.classList.add('active');
     });
+});
+
+checkBtn.addEventListener('click', async () => {
+    const username = userIdInput.value.trim();
+    const idRegex = /^[A-Za-z0-9]{1,20}$/;
+
+    if (!username) {
+        inputMessage.textContent = '필수 정보입니다.';
+        inputMessage.style.color = 'red';
+        userIdInput.style.borderColor = 'red';
+        return;
+    }
+
+    if (!idRegex.test(username)) {
+        inputMessage.textContent = '20자 이내의 영문 소문자, 대문자, 숫자만 사용 가능 합니다.';
+        inputMessage.style.color = 'red';
+        userIdInput.style.borderColor = 'red';
+        return;
+    }
+
+
+    try {
+        const res = await fetch(`${API_BASE}/accounts/validate-username/`, {
+            method: 'POST',
+            headers: {
+            'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ username })
+    });
+
+    const data = await res.json();
+
+    if (res.ok) {
+        inputMessage.textContent = '멋진 아이디네요 :)';
+        inputMessage.style.color = 'green';
+        userIdInput.style.borderColor = 'green';
+    } else {
+        if (data.error === '이미 사용 중인 아이디입니다.') {
+        inputMessage.textContent = '이미 사용 중인 아이디입니다.';
+        } else {
+        inputMessage.textContent = '알 수 없는 오류가 발생했습니다.';
+        }
+
+        inputMessage.style.color = 'red';
+        userIdInput.style.borderColor = 'red';
+    }
+
+    } catch (err) {
+        inputMessage.textContent = '서버 오류가 발생했습니다.';
+        inputMessage.style.color = 'red';
+        userIdInput.style.borderColor = 'red';
+        console.error('중복 확인 실패:', err);
+    }
 });
