@@ -127,6 +127,11 @@ select:focus {
     pointer-events: none;
 }
 
+.input-message {
+    margin-top: 1rem;
+    font-size: 1.6rem;
+}
+
 /* Phone Wrapper */
 .phone-wrapper {
     display: flex;
