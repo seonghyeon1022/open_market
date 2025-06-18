@@ -7,24 +7,21 @@ body {
 }
 
 /* Header */
-.login-header {
-    
+.signup-header {
+    margin-top: 7rem;
     background-color: #fff;
 }
 
-.login-header__logo {
+.signup-header__logo {
     text-align: center;
 }
 
-.login-header__logo img {
+.signup-header__logo img {
     width: 23.8rem;
     aspect-ratio: 238/74;
 }
 
 /* Main */
-main {
-    padding: 70px 0;
-}
 
 section {
     max-width: 550px;
