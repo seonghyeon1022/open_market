@@ -47,7 +47,6 @@ checkBtn.addEventListener('click', async () => {
     if (res.ok) {
         inputMessage.textContent = '멋진 아이디네요 :)';
         inputMessage.style.color = '#21BF48';
-        userIdInput.style.borderColor = '#21BF48';
     } else {
         if (data.error === '이미 사용 중인 아이디입니다.') {
         inputMessage.textContent = '이미 사용 중인 아이디입니다.';
@@ -124,7 +123,26 @@ passwordInput.addEventListener('input', () => {
         passwordCheckIcon.src = './images/icon-check-off.svg';
     } else {
         passwordMessage.textContent = '';
-        passwordInput.style.borderColor = '#21BF48';
         passwordCheckIcon.src = './images/icon-check-on.svg';
+    }
+});
+
+// 비밀번호 재확인
+const passwordConfirmInput = document.querySelector('#passwordConfirm');
+const passwordConfirmMessage = passwordConfirmInput.closest('.form-group').querySelector('.input-message');
+const passwordConfirmIcon = passwordConfirmInput.closest('.input-wrapper').querySelector('.password-check');
+
+passwordConfirmInput.addEventListener('input', () => {
+    const password = passwordInput.value;
+    const confirmPassword = passwordConfirmInput.value;
+
+    if (!password || password !== confirmPassword) {
+        passwordConfirmMessage.textContent = '비밀번호가 일치하지 않습니다.';
+        passwordConfirmMessage.style.color = '#EB5757';
+        passwordConfirmInput.style.borderColor = '#EB5757';
+        passwordConfirmIcon.src = './images/icon-check-off.svg';
+    } else {
+        passwordConfirmMessage.textContent = '';
+        passwordConfirmIcon.src = './images/icon-check-on.svg';
     }
 });
