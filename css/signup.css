@@ -26,6 +26,7 @@ section {
     width: 55rem;
     margin: 0 auto;
     border: 1px solid #C4C4C4;
+    border-top: none;
     border-radius: 1rem;
 }
 
