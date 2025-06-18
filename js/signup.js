@@ -5,6 +5,7 @@ const userIdInput = document.querySelector('#userId');
 const checkBtn = document.querySelector('.check-btn');
 const inputMessage = document.querySelector('#userId').closest('.form-group').querySelector('.input-message');
 
+// 회원가입 탭 전환
 tabItems.forEach((tab, index) => {
     tab.addEventListener('click', () => {
     tabItems.forEach(item => item.classList.remove('active'));
@@ -12,6 +13,7 @@ tabItems.forEach((tab, index) => {
     });
 });
 
+// 아이디 중복확인, 유효성 검사
 checkBtn.addEventListener('click', async () => {
     const username = userIdInput.value.trim();
     const idRegex = /^[A-Za-z0-9]{1,20}$/;
@@ -65,6 +67,7 @@ checkBtn.addEventListener('click', async () => {
     }
 });
 
+// 하위 필드 포커스시 경고문구 표시
 const inputOrder = [
     document.querySelector('#userId'),
     document.querySelector('#password'),
@@ -102,6 +105,7 @@ inputOrder.forEach((input, index) => {
     });
 });
 
+// 비밀번호 유효성 검사
 const passwordInput = document.querySelector('#password');
 const passwordCheckIcon = passwordInput.closest('.input-wrapper').querySelector('.password-check');
 const passwordMessage = passwordInput.closest('.form-group').querySelector('.input-message');
