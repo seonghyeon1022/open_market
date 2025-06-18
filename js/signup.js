@@ -64,3 +64,40 @@ checkBtn.addEventListener('click', async () => {
         console.error('중복 확인 실패:', err);
     }
 });
+
+const inputOrder = [
+    document.querySelector('#userId'),
+    document.querySelector('#password'),
+    document.querySelector('#passwordConfirm'),
+    document.querySelector('#userName'),
+    document.querySelector('#phoneMiddle'),
+    document.querySelector('#phoneLast'),
+];
+
+function getMessageElement(input) {
+    return input.closest('.form-group')?.querySelector('.input-message');
+}
+
+inputOrder.forEach((input, index) => {
+    input.addEventListener('focus', () => {
+        for (let i = 0; i < index; i++) {
+            const prevInput = inputOrder[i];
+            const value = prevInput.value.trim();
+            const messageEl = getMessageElement(prevInput);
+
+            if (!value && messageEl) {
+                messageEl.textContent = '필수 정보입니다.';
+                messageEl.style.color = '#EB5757';
+                prevInput.style.borderColor = '#EB5757';
+            }
+        }
+    });
+
+    input.addEventListener('input', () => {
+        const messageEl = getMessageElement(input);
+        if (messageEl && input.value.trim()) {
+            messageEl.textContent = '';
+            input.style.borderColor = '';
+        }
+    });
+});
