@@ -174,12 +174,17 @@ select:focus {
 /* Submit Button */
 .signup-btn {
     padding: 1.9rem 20.6rem;
-    background-color: #21BF48;
+    background-color: #C4C4C4;
     color: #fff;
     border: none;
     border-radius: 5px;
     font-size: 1.8rem;
     font-weight: 700;
-    cursor: pointer;
+    cursor: not-allowed;
     white-space: nowrap;
+}
+
+.signup-btn.active {
+    background-color: #21BF48;
+    cursor: pointer;
 }
