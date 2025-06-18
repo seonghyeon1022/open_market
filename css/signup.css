@@ -21,134 +21,111 @@ body {
     aspect-ratio: 238/74;
 }
 
-/* Main */
-
+/* main */
 section {
     width: 55rem;
     margin: 0 auto;
+    border: 1px solid #C4C4C4;
+    border-radius: 1rem;
 }
 
 /* Sign Tabs */
 .sign-tabs {
     display: flex;
-    list-style: none;
-    margin-bottom: 40px;
-    border-radius: 10px;
-    overflow: hidden;
-    border: 1px solid #c4c4c4;
 }
 
 .sign__tab-item {
-    flex: 1;
+    width: 100%;
+    padding: 2rem 7.7rem;
+    border: 1px solid #C4C4C4;
+    border-radius: 1rem;
+    background: #F2F2F2;
+    cursor: pointer;
+}
+
+.sign__tab-item.active {
+    background: #fff;
+    border-bottom: none;
 }
 
 .sign__tab-item button {
-    width: 100%;
-    padding: 20px;
-    border: none;
-    background-color: #fff;
-    font-size: 18px;
+    font-size: 1.8rem;
     font-weight: 500;
-    color: #767676;
-    cursor: pointer;
-    transition: all 0.2s ease;
-}
-
-.sign__tab-item.active button {
-    background-color: #21bf48;
-    color: #fff;
-    font-weight: 700;
 }
 
 /* Form */
 .signup-form {
-    background-color: #fff;
-    padding: 40px 35px;
-    border-radius: 10px;
-    border: 1px solid #c4c4c4;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1.2rem;
+
+    padding: 3.5rem;
 }
 
 .form-group {
-    margin-bottom: 16px;
-}
-
-.form-group:last-of-type {
-    margin-bottom: 34px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 /* Labels */
-label {
-    display: block;
-    font-size: 16px;
-    font-weight: 500;
+.form-group label {
+    font-size: 1.6rem;
+    font-weight: 400;
     color: #767676;
-    margin-bottom: 10px;
+    margin-bottom: 1rem;
 }
 
 /* Input Styles */
-input[type="text"],
-input[type="password"],
-input[type="tel"],
+.form-group input,
 select {
     width: 100%;
-    padding: 20px;
+    padding: 1.6rem;
     border: 1px solid #c4c4c4;
     border-radius: 5px;
-    font-size: 16px;
+    font-size: 1.6rem;
     outline: none;
-    transition: border-color 0.2s ease;
 }
 
-input[type="text"]:focus,
-input[type="password"]:focus,
-input[type="tel"]:focus,
+.form-group input:focus,
 select:focus {
-    border-color: #21bf48;
+    border-color: #21BF48;
 }
 
 /* Input Wrapper */
 .input-wrapper {
     display: flex;
-    gap: 12px;
     align-items: center;
-}
-
-.input-wrapper input {
-    flex: 1;
+    gap: 1.2rem;
 }
 
 .check-btn {
-    padding: 20px 25px;
-    background-color: #21bf48;
+    padding: 1.7rem 3.1rem;
+    background-color: #21BF48;
     color: #fff;
     border: none;
     border-radius: 5px;
-    font-size: 16px;
+    font-size: 1.6rem;
     font-weight: 500;
     cursor: pointer;
     white-space: nowrap;
-    transition: background-color 0.2s ease;
-}
-
-.check-btn:hover {
-    background-color: #1ea441;
 }
 
 .password-check {
-    width: 28px;
-    height: 28px;
-    flex-shrink: 0;
+    width: 2.8rem;
+    aspect-ratio: 1/1;
 }
 
 /* Phone Wrapper */
 .phone-wrapper {
     display: flex;
-    gap: 12px;
+    gap: 1.2rem;
 }
 
 .phone-wrapper select {
-    width: 152px;
-    flex-shrink: 0;
+    width: 15.2rem;
+    text-align: center;
 }
 
 .phone-wrapper input {
@@ -159,56 +136,35 @@ select:focus {
 .checkbox-wrapper {
     display: flex;
     align-items: flex-start;
-    gap: 10px;
+    gap: 1rem;
 }
 
-input[type="checkbox"] {
-    width: 16px;
-    height: 16px;
-    margin-top: 2px;
-    flex-shrink: 0;
+.checkbox-wrapper input {
+    width: 1.6rem;
+    height: 1.6rem;
 }
 
 .checkbox-wrapper label {
-    font-size: 16px;
+    font-size: 1.6rem;
     color: #767676;
     font-weight: 400;
-    margin-bottom: 0;
-    line-height: 20px;
+    line-height: 2rem;
 }
 
 .link {
-    color: #21bf48;
+    font-weight: 700;
     text-decoration: underline;
-}
-
-.link:hover {
-    color: #1ea441;
-}
-
-/* Input Message */
-.input-message {
-    display: block;
-    font-size: 16px;
-    color: #eb5757;
-    margin-top: 10px;
-    min-height: 20px;
 }
 
 /* Submit Button */
 .signup-btn {
-    width: 100%;
-    padding: 19px;
-    background-color: #21bf48;
+    padding: 1.9rem 20.6rem;
+    background-color: #21BF48;
     color: #fff;
     border: none;
     border-radius: 5px;
-    font-size: 24px;
+    font-size: 1.8rem;
     font-weight: 700;
     cursor: pointer;
-    transition: background-color 0.2s ease;
-}
-
-.signup-btn:hover {
-    background-color: #1ea441;
+    white-space: nowrap;
 }
