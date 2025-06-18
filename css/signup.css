@@ -113,9 +113,18 @@ select:focus {
     white-space: nowrap;
 }
 
+.input-wrapper.pw {
+    position: relative;
+}
+
 .password-check {
+    position: absolute;
     width: 2.8rem;
     aspect-ratio: 1/1;
+    transform: translateY(-50%);
+    top: 50%;
+    right: 15px;
+    pointer-events: none;
 }
 
 /* Phone Wrapper */
