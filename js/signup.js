@@ -4,6 +4,7 @@ const tabItems = document.querySelectorAll('.sign__tab-item');
 const userIdInput = document.querySelector('#userId');
 const checkBtn = document.querySelector('.check-btn');
 const inputMessage = document.querySelector('#userId').closest('.form-group').querySelector('.input-message');
+const signupBtn = document.querySelector('.signup-btn');
 
 // 회원가입 탭 전환
 tabItems.forEach((tab, index) => {
@@ -146,3 +147,49 @@ passwordConfirmInput.addEventListener('input', () => {
         passwordConfirmIcon.src = './images/icon-check-on.svg';
     }
 });
+
+// 가입하기 버튼
+signupBtn.addEventListener('click', async (e) => {
+    e.preventDefault(); // 폼 제출 막기
+
+    const username = userIdInput.value.trim();
+    const password = passwordInput.value;
+    const name = document.querySelector('#userName').value.trim();
+
+    const phonePre = document.querySelector('#phonePre').value;
+    const phoneMiddle = document.querySelector('#phoneMiddle').value.trim();
+    const phoneLast = document.querySelector('#phoneLast').value.trim();
+    const phoneNumber = phonePre + phoneMiddle + phoneLast;
+
+    const phoneMessageEl = document.querySelector('#phoneLast')
+        .closest('.form-group')
+        .querySelector('.input-message');
+
+    try {
+        const res = await fetch(`${API_BASE}/accounts/buyer/signup/`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                username,
+                password,
+                name,
+                phone_number: phoneNumber,
+            }),
+        });
+
+        const data = await res.json();
+
+        if (!res.ok) {
+            // 전화번호 중복 에러
+            if (data.phone_number?.[0] === '해당 사용자 전화번호는 이미 존재합니다.') {
+                phoneMessageEl.textContent = '해당 사용자 전화번호는 이미 존재합니다.';
+                phoneMessageEl.style.color = '#EB5757';
+            }
+            return;
+        }
+        // location.href = '/welcome'; // 필요한 리다이렉트
+    } catch (err) {
+        console.error('서버 오류:', err);
+    }
+});
+
