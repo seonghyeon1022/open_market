@@ -1,36 +1,52 @@
 import { ENDPOINT } from './api/config.js';
 import { saveAuthData } from './core/storage.js';
 
-// ==================== 상수 & DOM 요소 ====================
 const loginForm = document.querySelector('.login__form');
 const idInput = document.getElementById('id');
 const pwInput = document.getElementById('pw');
 const errorMessage = document.getElementById('loginError');
 const tabItems = document.querySelectorAll('.login__tab-item');
 
-// ==================== 유틸 함수 ====================
+/**
+ * 에러 메시지를 화면에 보여주고, 필요하면 해당 입력창에 포커스 이동
+ * @param {string} message - 보여줄 에러 메시지
+ * @param {HTMLElement} [focusInput=null] - 포커스 이동할 입력 요소
+ */
 function showError(message, focusInput = null) {
     errorMessage.textContent = message;
     errorMessage.classList.add('show');
     if (focusInput) focusInput.focus();
 }
 
+/**
+ * 에러 메시지를 초기화하고 숨김 처리
+ */
 function clearError() {
     errorMessage.textContent = '';
     errorMessage.classList.remove('show');
 }
 
+/**
+ * 아이디와 비밀번호 입력창을 초기화하고 에러 메시지 제거
+ */
 function resetInputs() {
     idInput.value = '';
     pwInput.value = '';
     clearError();
 }
 
+/**
+ * URL 쿼리에서 redirect 파라미터를 추출하여 반환
+ * @returns {string|null} - redirect 파라미터 값 또는 null
+ */
 function getRedirectUrl() {
     const urlParams = new URLSearchParams(window.location.search);
     return urlParams.get('redirect');
 }
 
+/**
+ * 로그인 후 리다이렉트할 URL을 결정하고 이동 처리
+ */
 function handleLoginRedirect() {
     const redirectUrl = getRedirectUrl();
 
@@ -47,13 +63,20 @@ function handleLoginRedirect() {
     }
 }
 
-// ==================== 이벤트 핸들러 ====================
+/**
+ * 탭 클릭 시 활성화 표시를 바꾸고 입력값 초기화
+ * @param {number} index - 클릭한 탭의 인덱스
+ */
 function handleTabClick(index) {
     tabItems.forEach(t => t.classList.remove('active'));
     tabItems[index].classList.add('active');
     resetInputs();
 }
 
+/**
+ * 로그인 폼 제출 이벤트 처리
+ * @param {Event} event - submit 이벤트 객체
+ */
 async function handleLoginSubmit(event) {
     event.preventDefault();
 
@@ -102,7 +125,6 @@ async function handleLoginSubmit(event) {
     }
 }
 
-// ==================== 이벤트 리스너 등록 ====================
 tabItems.forEach((tab, index) => {
     tab.addEventListener('click', () => handleTabClick(index));
 });
