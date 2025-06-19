@@ -18,17 +18,11 @@ function showError(message, focusInput = null) {
     if (focusInput) focusInput.focus();
 }
 
-/**
- * 에러 메시지를 초기화하고 숨김 처리
- */
 function clearError() {
     errorMessage.textContent = '';
     errorMessage.classList.remove('show');
 }
 
-/**
- * 아이디와 비밀번호 입력창을 초기화하고 에러 메시지 제거
- */
 function resetInputs() {
     idInput.value = '';
     pwInput.value = '';
