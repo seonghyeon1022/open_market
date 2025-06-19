@@ -80,7 +80,6 @@ checkBtn.addEventListener('click', async () => {
         const msgEl = getMessageElement(userIdInput);
         msgEl.textContent = '멋진 아이디네요 :)';
         msgEl.style.color = '#21BF48';
-        userIdInput.style.borderColor = '#21BF48';
     } else {
         setError(userIdInput, data.error === '이미 사용 중인 아이디입니다.' ? '이미 사용 중인 아이디입니다.' : '알 수 없는 오류가 발생했습니다.');
     }
@@ -90,7 +89,7 @@ checkBtn.addEventListener('click', async () => {
     }
 });
 
-// 순차 입력 유효성 체크 (포커스 시 이전 필드 체크)
+// 하위 필드 포커스 시 경고문구 표시
 const inputOrder = [userIdInput, passwordInput, passwordConfirmInput, userNameInput, phoneMiddleInput, phoneLastInput];
 
 inputOrder.forEach((input, idx) => {
@@ -126,7 +125,7 @@ function validatePassword() {
 }
 passwordInput.addEventListener('input', () => {
     validatePassword();
-    validatePasswordConfirm(); // 비밀번호 바뀌면 재확인도 검사
+    validatePasswordConfirm(); 
 });
 
 // 비밀번호 재확인 검사
