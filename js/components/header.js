@@ -22,7 +22,7 @@ const headerHTML = `
                 </a>
             </li>
             <li class="gnb__menu-item">
-                <a href="./login.html?redirect=index.html">
+                <a href="./login.html">
                 <img src="./images/icon-user.svg" alt="로그인">
                 <span>로그인</span>
                 </a>
