@@ -1,9 +1,10 @@
+import { ENDPOINT } from './api/config.js';
+
 const loginForm = document.querySelector('.login__form');
 const idInput = document.getElementById('id');
 const pwInput = document.getElementById('pw');
 const errorMessage = document.getElementById('loginError');
 const tabItems = document.querySelectorAll('.login__tab-item');
-const API_BASE = 'https://api.wenivops.co.kr/services/open-market';
 
 let currentUserType = 'BUYER';
 
@@ -47,7 +48,7 @@ loginForm.addEventListener('submit', async function(e) {
     errorMessage.textContent = '';
 
     try {
-        const res = await fetch(`${API_BASE}/accounts/login/`, {
+        const res = await fetch(ENDPOINT.LOGIN, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
