@@ -76,6 +76,13 @@ function validateUserId() {
 
 function validatePassword() {
     const pwd = passwordInput.value;
+
+    if (!pwd) {
+        clearError(passwordInput);
+        setCheckIcon(passwordInput, false);
+        return false;
+    }
+    
     const isValid =
         pwd.length >= 8 &&
         /[a-z]/.test(pwd) &&
