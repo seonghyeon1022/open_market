@@ -22,9 +22,6 @@ const inputOrder = [
     phoneLastInput,
 ];
 
-const idRegex = /^[A-Za-z0-9]{1,20}$/;
-
-
 // 공통 유틸 함수
 function getMessageElement(input) {
     return input.closest('.form-group')?.querySelector('.input-message');
@@ -62,6 +59,8 @@ function setCheckIcon(input, isValid) {
 // 유효성 검사 함수
 function validateUserId() {
     const username = userIdInput.value.trim();
+    const idRegex = /^[A-Za-z0-9]{1,20}$/;
+    
     if (!username) {
         setError(userIdInput, '필수 정보입니다.');
         return false;
