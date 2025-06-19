@@ -258,3 +258,11 @@ passwordInput.addEventListener('input', () => {
 });
 
 passwordConfirmInput.addEventListener('input', validatePasswordConfirm);
+
+inputOrder.forEach(input => {
+    input.addEventListener('input', updateSignupButtonState);
+});
+
+termsCheck.addEventListener('change', updateSignupButtonState);
+
+signupBtn.disabled = true;
