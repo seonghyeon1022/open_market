@@ -82,7 +82,7 @@ function validatePassword() {
         setCheckIcon(passwordInput, false);
         return false;
     }
-    
+
     const isValid =
         pwd.length >= 8 &&
         /[a-z]/.test(pwd) &&
@@ -240,7 +240,7 @@ async function handleSignup(e) {
             msgEl.textContent = '해당 사용자 전화번호는 이미 존재합니다.';
             msgEl.style.color = '#EB5757';
         } else if (res.ok) {
-            // location.href = '/welcome';
+            location.href = '../login.html';
         }
 
     } catch (err) {
