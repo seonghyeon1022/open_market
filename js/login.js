@@ -1,51 +1,58 @@
 import { ENDPOINT } from './api/config.js';
 
+// ==================== 상수 & DOM 요소 ====================
 const loginForm = document.querySelector('.login__form');
 const idInput = document.getElementById('id');
 const pwInput = document.getElementById('pw');
 const errorMessage = document.getElementById('loginError');
 const tabItems = document.querySelectorAll('.login__tab-item');
 
-let currentUserType = 'BUYER';
+// ==================== 유틸 함수 ====================
+function showError(message, focusInput = null) {
+    errorMessage.textContent = message;
+    errorMessage.classList.add('show');
+    if (focusInput) focusInput.focus();
+}
 
-tabItems.forEach((tab, index) => {
-    tab.addEventListener('click', () => {
-        tabItems.forEach(t => t.classList.remove('active'));
+function clearError() {
+    errorMessage.textContent = '';
+    errorMessage.classList.remove('show');
+}
 
-        tab.classList.add('active');
+function resetInputs() {
+    idInput.value = '';
+    pwInput.value = '';
+    clearError();
+}
 
-        currentUserType = index === 0 ? 'BUYER' : 'SELLER';
+function getRedirectUrl() {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get('redirect');
+}
 
-        idInput.value = '';
-        pwInput.value = '';
-        errorMessage.textContent = '';
-        errorMessage.classList.remove('show');
-    });
-});
+// ==================== 이벤트 핸들러 ====================
+function handleTabClick(index) {
+    tabItems.forEach(t => t.classList.remove('active'));
+    tabItems[index].classList.add('active');
+    resetInputs();
+}
 
-loginForm.addEventListener('submit', async function(e) {
-    e.preventDefault();
+async function handleLoginSubmit(event) {
+    event.preventDefault();
 
     const idValue = idInput.value.trim();
     const pwValue = pwInput.value.trim();
-    let message = '';
 
     if (!idValue) {
-        message = '아이디를 입력해 주세요.';
-    } else if (!pwValue) {
-        message = '비밀번호를 입력해 주세요.';
+        showError('아이디를 입력해 주세요.', idInput);
+        return;
     }
-    
-    if (message) {
-        errorMessage.textContent = message;
-        errorMessage.classList.add('show');
-        if (!idValue) idInput.focus();
-        else pwInput.focus();
+    if (!pwValue) {
+        showError('비밀번호를 입력해 주세요.', pwInput);
         return;
     }
 
-    errorMessage.classList.remove('show');
-    errorMessage.textContent = '';
+    clearError();
 
     try {
         const res = await fetch(ENDPOINT.LOGIN, {
@@ -53,35 +60,36 @@ loginForm.addEventListener('submit', async function(e) {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
                 username: idValue,
-                password: pwValue
-            })
+                password: pwValue,
+            }),
         });
-    
-    if (!res.ok) {
-        errorMessage.textContent = '아이디 또는 비밀번호가 일치하지 않습니다.';
-        errorMessage.classList.add('show');
-        pwInput.value = '';
-        pwInput.focus();
-        return;
-    }
 
-    const data = await res.json();
+        if (!res.ok) {
+            showError('아이디 또는 비밀번호가 일치하지 않습니다.', pwInput);
+            pwInput.value = '';
+            return;
+        }
 
-    const urlParams = new URLSearchParams(window.location.search);
-    const redirectUrl = urlParams.get('redirect');
-    
-    if (redirectUrl) {
-        window.location.href = decodeURIComponent(redirectUrl);
-    } else {
-        if (document.referrer && document.referrer.includes(window.location.origin)) {
+        const data = await res.json();
+
+        const redirectUrl = getRedirectUrl();
+
+        if (redirectUrl) {
+            window.location.href = decodeURIComponent(redirectUrl);
+        } else if (document.referrer && document.referrer.includes(window.location.origin)) {
             window.history.back();
         } else {
-            window.location.href = "/index.html"; 
+            window.location.href = '/index.html';
         }
-    }} catch (error) {
-        errorMessage.textContent = '서버 오류';
-        errorMessage.classList.add('show');
+    } catch (error) {
+        showError('서버 오류', pwInput);
         pwInput.value = '';
-        pwInput.focus();
     }
+}
+
+// ==================== 이벤트 리스너 등록 ====================
+tabItems.forEach((tab, index) => {
+    tab.addEventListener('click', () => handleTabClick(index));
 });
+
+loginForm.addEventListener('submit', handleLoginSubmit);
