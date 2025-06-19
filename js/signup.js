@@ -1,6 +1,5 @@
 import { ENDPOINT } from './api/config.js';
 
-// 상수, DOM
 const tabItems = document.querySelectorAll('.sign__tab-item');
 const userIdInput = document.querySelector('#userId');
 const checkBtn = document.querySelector('.check-btn');
@@ -22,15 +21,29 @@ const inputOrder = [
     phoneLastInput,
 ];
 
-// 공통 유틸 함수
+/**
+ * 특정 입력 요소의 에러 메시지 요소를 찾음
+ * @param {HTMLElement} input - 입력 요소
+ * @returns {HTMLElement|null} - 메시지 요소 혹은 null
+ */
 function getMessageElement(input) {
     return input.closest('.form-group')?.querySelector('.input-message');
 }
 
+/**
+ * 비밀번호 입력란 옆 체크 아이콘 요소 반환
+ * @param {HTMLElement} input - 비밀번호 입력 요소
+ * @returns {HTMLImageElement|null} - 체크 아이콘 이미지 요소 혹은 null
+ */
 function getPasswordCheckIcon(input) {
     return input.closest('.input-wrapper')?.querySelector('.password-check');
 }
 
+/**
+ * 입력 요소에 에러 스타일과 메시지 설정
+ * @param {HTMLElement} input - 입력 요소
+ * @param {string} message - 표시할 에러 메시지
+ */
 function setError(input, message) {
     const msgEl = getMessageElement(input);
     if (msgEl) {
@@ -40,6 +53,10 @@ function setError(input, message) {
     input.style.borderColor = '#EB5757';
 }
 
+/**
+ * 입력 요소의 에러 메시지와 스타일 초기화
+ * @param {HTMLElement} input - 입력 요소
+ */
 function clearError(input) {
     const msgEl = getMessageElement(input);
     if (msgEl) {
@@ -49,6 +66,11 @@ function clearError(input) {
     input.style.borderColor = '';
 }
 
+/**
+ * 비밀번호 체크 아이콘 이미지 변경
+ * @param {HTMLElement} input - 비밀번호 입력 요소
+ * @param {boolean} isValid - 유효성 통과 여부
+ */
 function setCheckIcon(input, isValid) {
     const icon = getPasswordCheckIcon(input);
     if (icon) {
@@ -56,7 +78,10 @@ function setCheckIcon(input, isValid) {
     }
 }
 
-// 유효성 검사 함수
+/**
+ * 사용자 아이디 유효성 검사
+ * @returns {boolean} 유효하면 true, 아니면 false
+ */
 function validateUserId() {
     const username = userIdInput.value.trim();
     const idRegex = /^[A-Za-z0-9]{1,20}$/;
@@ -73,6 +98,10 @@ function validateUserId() {
     return true;
 }
 
+/**
+ * 비밀번호 유효성 검사 (8자 이상, 영문 소문자, 숫자 포함)
+ * @returns {boolean} 유효하면 true, 아니면 false
+ */
 function validatePassword() {
     const pwd = passwordInput.value;
 
@@ -97,6 +126,10 @@ function validatePassword() {
     return true;
 }
 
+/**
+ * 비밀번호 확인 유효성 검사 (비밀번호와 일치하는지)
+ * @returns {boolean} 일치하면 true, 아니면 false
+ */
 function validatePasswordConfirm() {
     const pwd = passwordInput.value;
     const confirmPwd = passwordConfirmInput.value;
@@ -118,7 +151,9 @@ function validatePasswordConfirm() {
     return true;
 }
 
-// 버튼 활성화 체크 함수
+/**
+ * 모든 입력 필드와 약관 동의 여부에 따라 회원가입 버튼 활성화 상태 변경
+ */
 function updateSignupButtonState() {
     const allFilled = userIdInput.value.trim() &&
                     passwordInput.value &&
@@ -142,12 +177,18 @@ function updateSignupButtonState() {
     }
 }
 
-// 이벤트 핸들러 함수
+/**
+ * 회원가입 탭 클릭 시 활성화 상태 변경
+ * @param {Event} e - 클릭 이벤트 객체
+ */
 function handleTabClick(e) {
     tabItems.forEach(item => item.classList.remove('active'));
     e.currentTarget.classList.add('active');
 }
 
+/**
+ * 아이디 중복 확인 API 호출 및 결과 처리
+ */
 async function handleCheckUsername() {
     if (!validateUserId()) return;
 
@@ -175,6 +216,10 @@ async function handleCheckUsername() {
     }
 }
 
+/**
+ * 현재 포커스된 입력 필드 인덱스 이전에 비어있는 필드가 있으면 에러 메시지 표시
+ * @param {number} idx - 현재 입력 필드 인덱스
+ */
 function handleFocusInput(idx) {
     for (let i = 0; i < idx; i++) {
         if (!inputOrder[i].value.trim()) {
@@ -183,10 +228,18 @@ function handleFocusInput(idx) {
     }
 }
 
+/**
+ * 입력 시 에러 메시지 및 스타일 초기화
+ * @param {HTMLElement} input - 입력 요소
+ */
 function handleClearOnInput(input) {
     clearError(input);
 }
 
+/**
+ * 회원가입 폼 제출 처리
+ * @param {Event} e - submit 혹은 click 이벤트 객체
+ */
 async function handleSignup(e) {
     e.preventDefault();
 
@@ -247,8 +300,6 @@ async function handleSignup(e) {
     }
 }
 
-
-// 이벤트 리스너 등록
 tabItems.forEach(tab => tab.addEventListener('click', handleTabClick));
 checkBtn.addEventListener('click', handleCheckUsername);
 signupBtn.addEventListener('click', handleSignup);
