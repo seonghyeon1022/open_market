@@ -1,6 +1,6 @@
+// ==================== 상수 및 DOM ====================
 const API_BASE = 'https://api.wenivops.co.kr/services/open-market';
 
-// DOM Elements
 const tabItems = document.querySelectorAll('.sign__tab-item');
 const userIdInput = document.querySelector('#userId');
 const checkBtn = document.querySelector('.check-btn');
@@ -12,10 +12,23 @@ const phonePreSelect = document.querySelector('#phonePre');
 const phoneMiddleInput = document.querySelector('#phoneMiddle');
 const phoneLastInput = document.querySelector('#phoneLast');
 
-// 메시지/아이콘 관련 함수
+const inputOrder = [
+    userIdInput,
+    passwordInput,
+    passwordConfirmInput,
+    userNameInput,
+    phoneMiddleInput,
+    phoneLastInput,
+];
+
+const idRegex = /^[A-Za-z0-9]{1,20}$/;
+
+
+// ==================== 공통 유틸 함수 ====================
 function getMessageElement(input) {
     return input.closest('.form-group')?.querySelector('.input-message');
 }
+
 function getPasswordCheckIcon(input) {
     return input.closest('.input-wrapper')?.querySelector('.password-check');
 }
@@ -28,6 +41,7 @@ function setError(input, message) {
     }
     input.style.borderColor = '#EB5757';
 }
+
 function clearError(input) {
     const msgEl = getMessageElement(input);
     if (msgEl) {
@@ -39,96 +53,43 @@ function clearError(input) {
 
 function setCheckIcon(input, isValid) {
     const icon = getPasswordCheckIcon(input);
-    if (!icon) return;
-    icon.src = isValid ? './images/icon-check-on.svg' : './images/icon-check-off.svg';
+    if (icon) {
+        icon.src = isValid ? './images/icon-check-on.svg' : './images/icon-check-off.svg';
     }
+}
 
-// 아이디 정규식
-const idRegex = /^[A-Za-z0-9]{1,20}$/;
-
-// 탭 전환
-tabItems.forEach(tab => {
-    tab.addEventListener('click', () => {
-        tabItems.forEach(item => item.classList.remove('active'));
-        tab.classList.add('active');
-    });
-});
-
-// 아이디 중복 확인
-checkBtn.addEventListener('click', async () => {
+// ==================== 유효성 검사 함수 ====================
+function validateUserId() {
     const username = userIdInput.value.trim();
-
     if (!username) {
         setError(userIdInput, '필수 정보입니다.');
-        return;
+        return false;
     }
     if (!idRegex.test(username)) {
         setError(userIdInput, '20자 이내의 영문 소문자, 대문자, 숫자만 사용 가능 합니다.');
-        return;
+        return false;
     }
     clearError(userIdInput);
+    return true;
+}
 
-    try {
-    const res = await fetch(`${API_BASE}/accounts/validate-username/`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username }),
-    });
-    const data = await res.json();
-
-    if (res.ok) {
-        const msgEl = getMessageElement(userIdInput);
-        msgEl.textContent = '멋진 아이디네요 :)';
-        msgEl.style.color = '#21BF48';
-    } else {
-        setError(userIdInput, data.error === '이미 사용 중인 아이디입니다.' ? '이미 사용 중인 아이디입니다.' : '알 수 없는 오류가 발생했습니다.');
-    }
-    } catch (err) {
-        setError(userIdInput, '서버 오류가 발생했습니다.');
-        console.error('중복 확인 실패:', err);
-    }
-});
-
-// 하위 필드 포커스 시 경고문구 표시
-const inputOrder = [userIdInput, passwordInput, passwordConfirmInput, userNameInput, phoneMiddleInput, phoneLastInput];
-
-inputOrder.forEach((input, idx) => {
-    input.addEventListener('focus', () => {
-    for (let i = 0; i < idx; i++) {
-            const prevInput = inputOrder[i];
-            if (!prevInput.value.trim()) {
-            setError(prevInput, '필수 정보입니다.');
-            }
-        }
-    });
-    input.addEventListener('input', () => {
-        clearError(input);
-    });
-});
-
-// 비밀번호 유효성 검사
 function validatePassword() {
     const pwd = passwordInput.value;
-    const minLength = pwd.length >= 8;
-    const hasLowercase = /[a-z]/.test(pwd);
-    const hasNumber = /\d/.test(pwd);
+    const isValid =
+        pwd.length >= 8 &&
+        /[a-z]/.test(pwd) &&
+        /\d/.test(pwd);
 
-    if (!(minLength && hasLowercase && hasNumber)) {
+    if (!isValid) {
         setError(passwordInput, '8자 이상, 영문 대 소문자, 숫자, 특수문자를 사용하세요.');
         setCheckIcon(passwordInput, false);
         return false;
-    } else {
-        clearError(passwordInput);
-        setCheckIcon(passwordInput, true);
-        return true;
     }
+    clearError(passwordInput);
+    setCheckIcon(passwordInput, true);
+    return true;
 }
-passwordInput.addEventListener('input', () => {
-    validatePassword();
-    validatePasswordConfirm(); 
-});
 
-// 비밀번호 재확인 검사
 function validatePasswordConfirm() {
     const pwd = passwordInput.value;
     const confirmPwd = passwordConfirmInput.value;
@@ -139,25 +100,67 @@ function validatePasswordConfirm() {
         return false;
     }
 
-    if (pwd === confirmPwd) {
-        clearError(passwordConfirmInput);
-        setCheckIcon(passwordConfirmInput, true);
-        return true;
-    } else {
+    const isMatch = pwd === confirmPwd;
+    if (!isMatch) {
         setError(passwordConfirmInput, '비밀번호가 일치하지 않습니다.');
         setCheckIcon(passwordConfirmInput, false);
         return false;
     }
-    }
-passwordConfirmInput.addEventListener('input', validatePasswordConfirm);
+    clearError(passwordConfirmInput);
+    setCheckIcon(passwordConfirmInput, true);
+    return true;
+}
 
-// 회원가입 처리
-signupBtn.addEventListener('click', async e => {
+
+// ==================== 이벤트 핸들러 함수 ====================
+function handleTabClick(e) {
+    tabItems.forEach(item => item.classList.remove('active'));
+    e.currentTarget.classList.add('active');
+}
+
+async function handleCheckUsername() {
+    if (!validateUserId()) return;
+
+    const username = userIdInput.value.trim();
+
+    try {
+        const res = await fetch(`${API_BASE}/accounts/validate-username/`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ username }),
+        });
+
+        const data = await res.json();
+
+        if (res.ok) {
+            const msgEl = getMessageElement(userIdInput);
+            msgEl.textContent = '멋진 아이디네요 :)';
+            msgEl.style.color = '#21BF48';
+        } else {
+            setError(userIdInput, data.error === '이미 사용 중인 아이디입니다.' ? data.error : '알 수 없는 오류가 발생했습니다.');
+        }
+    } catch (err) {
+        console.error('중복 확인 실패:', err);
+        setError(userIdInput, '중복 확인 실패');
+    }
+}
+
+function handleFocusInput(idx) {
+    for (let i = 0; i < idx; i++) {
+        if (!inputOrder[i].value.trim()) {
+            setError(inputOrder[i], '필수 정보입니다.');
+        }
+    }
+}
+
+function handleClearOnInput(input) {
+    clearError(input);
+}
+
+async function handleSignup(e) {
     e.preventDefault();
 
-  // 필수 입력 체크
-    if (!userIdInput.value.trim()) {
-        setError(userIdInput, '필수 정보입니다.');
+    if (!validateUserId()) {
         userIdInput.focus();
         return;
     }
@@ -175,41 +178,59 @@ signupBtn.addEventListener('click', async e => {
         return;
     }
     if (!phoneMiddleInput.value.trim() || !phoneLastInput.value.trim()) {
-        const phoneMessageEl = phoneLastInput.closest('.form-group').querySelector('.input-message');
-        phoneMessageEl.textContent = '필수 정보입니다.';
-        phoneMessageEl.style.color = '#EB5757';
-    if (!phoneMiddleInput.value.trim()) phoneMiddleInput.style.borderColor = '#EB5757';
-    if (!phoneLastInput.value.trim()) phoneLastInput.style.borderColor = '#EB5757';
-    if (!phoneMiddleInput.value.trim()) phoneMiddleInput.focus();
-    else phoneLastInput.focus();
-    return;
+        if (!phoneMiddleInput.value.trim()) {
+            phoneMiddleInput.style.borderColor = '#EB5757';
+            phoneMiddleInput.focus();
+        } else {
+            phoneLastInput.style.borderColor = '#EB5757';
+            phoneLastInput.focus();
+        }
+        return;
     }
 
-    const username = userIdInput.value.trim();
-    const password = passwordInput.value;
-    const name = userNameInput.value.trim();
-    const phoneNumber = phonePreSelect.value + phoneMiddleInput.value.trim() + phoneLastInput.value.trim();
+    const payload = {
+        username: userIdInput.value.trim(),
+        password: passwordInput.value,
+        name: userNameInput.value.trim(),
+        phone_number: phonePreSelect.value + phoneMiddleInput.value.trim() + phoneLastInput.value.trim(),
+    };
 
     try {
         const res = await fetch(`${API_BASE}/accounts/buyer/signup/`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ username, password, name, phone_number: phoneNumber }),
+            body: JSON.stringify(payload),
         });
-    const data = await res.json();
 
-    if (!res.ok) {
-        if (data.phone_number?.[0] === '해당 사용자 전화번호는 이미 존재합니다.') {
-            const phoneMessageEl = phoneLastInput.closest('.form-group').querySelector('.input-message');
-            phoneMessageEl.textContent = '해당 사용자 전화번호는 이미 존재합니다.';
-            phoneMessageEl.style.color = '#EB5757';
-        } 
-        return;
-    }
+        const data = await res.json();
 
-    // location.href = '/welcome'; // 필요시 리다이렉트
+        if (!res.ok && data.phone_number?.[0] === '해당 사용자 전화번호는 이미 존재합니다.') {
+            const msgEl = getMessageElement(phoneLastInput);
+            msgEl.textContent = '해당 사용자 전화번호는 이미 존재합니다.';
+            msgEl.style.color = '#EB5757';
+        } else if (res.ok) {
+            // location.href = '/welcome';
+        }
 
     } catch (err) {
         console.error('서버 오류:', err);
     }
+}
+
+
+// ==================== 이벤트 리스너 등록 ====================
+tabItems.forEach(tab => tab.addEventListener('click', handleTabClick));
+checkBtn.addEventListener('click', handleCheckUsername);
+signupBtn.addEventListener('click', handleSignup);
+
+inputOrder.forEach((input, idx) => {
+    input.addEventListener('focus', () => handleFocusInput(idx));
+    input.addEventListener('input', () => handleClearOnInput(input));
 });
+
+passwordInput.addEventListener('input', () => {
+    validatePassword();
+    validatePasswordConfirm();
+});
+
+passwordConfirmInput.addEventListener('input', validatePasswordConfirm);
