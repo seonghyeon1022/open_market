@@ -1,6 +1,6 @@
-// 상수, DOM
-const API_BASE = 'https://api.wenivops.co.kr/services/open-market';
+import { ENDPOINT } from './api/config.js';
 
+// 상수, DOM
 const tabItems = document.querySelectorAll('.sign__tab-item');
 const userIdInput = document.querySelector('#userId');
 const checkBtn = document.querySelector('.check-btn');
@@ -154,7 +154,7 @@ async function handleCheckUsername() {
     const username = userIdInput.value.trim();
 
     try {
-        const res = await fetch(`${API_BASE}/accounts/validate-username/`, {
+        const res = await fetch(ENDPOINT.VALIDATE_USERNAME, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ username }),
@@ -226,7 +226,7 @@ async function handleSignup(e) {
     };
 
     try {
-        const res = await fetch(`${API_BASE}/accounts/buyer/signup/`, {
+        const res = await fetch(ENDPOINT.SIGNUP_BUYER, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(payload),
