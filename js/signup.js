@@ -1,4 +1,4 @@
-// ==================== 상수 및 DOM ====================
+// 상수, DOM
 const API_BASE = 'https://api.wenivops.co.kr/services/open-market';
 
 const tabItems = document.querySelectorAll('.sign__tab-item');
@@ -25,7 +25,7 @@ const inputOrder = [
 const idRegex = /^[A-Za-z0-9]{1,20}$/;
 
 
-// ==================== 공통 유틸 함수 ====================
+// 공통 유틸 함수
 function getMessageElement(input) {
     return input.closest('.form-group')?.querySelector('.input-message');
 }
@@ -59,7 +59,7 @@ function setCheckIcon(input, isValid) {
     }
 }
 
-// ==================== 유효성 검사 함수 ====================
+// 유효성 검사 함수
 function validateUserId() {
     const username = userIdInput.value.trim();
     if (!username) {
@@ -119,7 +119,7 @@ function validatePasswordConfirm() {
     return true;
 }
 
-// ==================== 버튼 활성화 상태 업데이트 함수 ====================
+// 버튼 활성화 체크 함수
 function updateSignupButtonState() {
     const allFilled = userIdInput.value.trim() &&
                     passwordInput.value &&
@@ -143,7 +143,7 @@ function updateSignupButtonState() {
     }
 }
 
-// ==================== 이벤트 핸들러 함수 ====================
+// 이벤트 핸들러 함수
 function handleTabClick(e) {
     tabItems.forEach(item => item.classList.remove('active'));
     e.currentTarget.classList.add('active');
@@ -249,7 +249,7 @@ async function handleSignup(e) {
 }
 
 
-// ==================== 이벤트 리스너 등록 ====================
+// 이벤트 리스너 등록
 tabItems.forEach(tab => tab.addEventListener('click', handleTabClick));
 checkBtn.addEventListener('click', handleCheckUsername);
 signupBtn.addEventListener('click', handleSignup);
