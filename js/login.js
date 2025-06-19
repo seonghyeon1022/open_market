@@ -30,6 +30,22 @@ function getRedirectUrl() {
     return urlParams.get('redirect');
 }
 
+function handleLoginRedirect() {
+    const redirectUrl = getRedirectUrl();
+
+    if (redirectUrl) {
+        window.location.href = decodeURIComponent(redirectUrl);
+    } else if (
+        document.referrer &&
+        !document.referrer.includes('/login.html') &&
+        document.referrer.includes(window.location.origin)
+    ) {
+        window.location.href = document.referrer;
+    } else {
+        window.location.href = '/index.html';
+    }
+}
+
 // ==================== 이벤트 핸들러 ====================
 function handleTabClick(index) {
     tabItems.forEach(t => t.classList.remove('active'));
@@ -72,15 +88,7 @@ async function handleLoginSubmit(event) {
 
         const data = await res.json();
 
-        const redirectUrl = getRedirectUrl();
-
-        if (redirectUrl) {
-            window.location.href = decodeURIComponent(redirectUrl);
-        } else if (document.referrer && document.referrer.includes(window.location.origin)) {
-            window.history.back();
-        } else {
-            window.location.href = '/index.html';
-        }
+        handleLoginRedirect();
     } catch (error) {
         showError('서버 오류', pwInput);
         pwInput.value = '';
