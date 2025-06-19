@@ -1,4 +1,5 @@
 import { ENDPOINT } from './api/config.js';
+import { saveAuthData } from './core/storage.js';
 
 // ==================== 상수 & DOM 요소 ====================
 const loginForm = document.querySelector('.login__form');
@@ -87,6 +88,12 @@ async function handleLoginSubmit(event) {
         }
 
         const data = await res.json();
+
+        saveAuthData({
+            accessToken: data.access,
+            refreshToken: data.refresh,
+            userType: data.user.user_type,
+        });
 
         handleLoginRedirect();
     } catch (error) {
