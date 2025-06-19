@@ -11,6 +11,7 @@ const userNameInput = document.querySelector('#userName');
 const phonePreSelect = document.querySelector('#phonePre');
 const phoneMiddleInput = document.querySelector('#phoneMiddle');
 const phoneLastInput = document.querySelector('#phoneLast');
+const termsCheck = document.querySelector('#terms');
 
 const inputOrder = [
     userIdInput,
