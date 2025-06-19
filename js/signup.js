@@ -112,6 +112,29 @@ function validatePasswordConfirm() {
     return true;
 }
 
+// ==================== 버튼 활성화 상태 업데이트 함수 ====================
+function updateSignupButtonState() {
+    const allFilled = userIdInput.value.trim() &&
+                    passwordInput.value &&
+                    passwordConfirmInput.value &&
+                    userNameInput.value.trim() &&
+                    phoneMiddleInput.value.trim() &&
+                    phoneLastInput.value.trim();
+
+    const isValid = validateUserId() &&
+                    validatePassword() &&
+                    validatePasswordConfirm();
+
+    const isAgreed = termsCheck.checked;
+
+    if (allFilled && isValid && isAgreed) {
+        signupBtn.classList.add('active');
+        signupBtn.disabled = false;
+    } else {
+        signupBtn.classList.remove('active');
+        signupBtn.disabled = true;
+    }
+}
 
 // ==================== 이벤트 핸들러 함수 ====================
 function handleTabClick(e) {
