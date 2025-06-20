@@ -1,0 +1,136 @@
+/* 메인 슬라이더 */
+.main-slider {
+    position: relative;
+    width: 100%;
+    height: 50rem;
+    overflow: hidden;
+    margin-bottom: 8rem;
+    background-color: #F2F2F2;
+}
+
+.main-slider__slide {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.main-slider__nav--prev,
+.main-slider__nav--next {
+    position: absolute;  
+    top: 50%;
+    transform: translateY(-50%);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 6rem;
+    height: 12.4rem;
+
+    background: none;    
+    cursor: pointer;
+    
+    z-index: 10;
+}
+
+.main-slider__nav--prev {
+    left: 3rem;
+}
+
+.main-slider__nav--next {
+    right: 3rem;
+}
+
+.main-slider__nav--prev img,
+.main-slider__nav--next img {
+    width: 5rem;
+    aspect-ratio: 1/2;
+}
+
+/* 슬라이더 페이지네이션 */
+.main-slider__pagination {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+}
+
+.main-slider__pagination-list {
+    display: flex;
+    gap: 0.6rem;
+}
+
+.main-slider__pagination-item button {
+    width: 0.6rem;
+    aspect-ratio: 1/1;
+    border-radius: 50%;
+    border: none;
+    background: #FFFFFF;
+    cursor: pointer;
+}
+
+/* 상품 섹션 */
+.products-section {
+    max-width: 128rem;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 7rem;
+    row-gap: 7.8rem;
+}
+
+/* 상품 카드 */
+.product-card {
+    position: relative;
+}
+
+.product-card a {
+    gap: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.product-card img {
+    width: 38rem;
+    aspect-ratio: 1/1;
+    border-radius: 1rem;
+    border: 1px solid #C4C4C4;
+}
+
+.product-card__brand {
+    font-size: 1.6rem;
+    font-weight: 400;
+    line-height: 2.2rem;
+    color: #767676;
+}
+
+.product-card__name {
+    font-size: 1.8rem;
+    font-weight: 400;
+    line-height: 2.2rem;
+    color: #000000;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.product-card__price {
+    font-size: 2.4rem;
+    font-weight: 700;
+    color: #000000;
+}
+
+.product-card__price::after {
+    content: '원';
+    font-size: 1.6rem;
+    font-weight: 400;
+    color: #000000;
+    margin-left: 0.2rem;
+}
