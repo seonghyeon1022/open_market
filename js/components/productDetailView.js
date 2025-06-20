@@ -39,11 +39,11 @@ export function createProductMarkup(product) {
                 <form class="purchase-form" action="#">
                     <fieldset class="quantity-selector">
                         <legend class="sr-only">수량 선택</legend>
-                        <button type="button">
+                        <button type="button" class="quantity-minus">
                             <img src="./images/icon-minus-line.svg" alt="수량 감소 버튼">
                         </button>
-                        <input type="number" name="quantity" value="1" min="1" max="${product.stock}" aria-label="수량">
-                        <button type="button">
+                        <input type="number" name="quantity" value="1" min="1" max="${product.stock}" readonly />
+                        <button type="button" class="quantity-plus">
                             <img src="./images/icon-plus-line.svg" alt="수량 추가 버튼">
                         </button>
                     </fieldset>
