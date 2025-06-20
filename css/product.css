@@ -111,6 +111,14 @@ main {
     border-radius: 0 5px 5px 0;
 }
 
+.quantity-selector button:disabled {
+    cursor: not-allowed;
+    opacity: 0.4;
+    filter: grayscale(70%);
+    background-color: #eee;
+    color: #999;
+}
+
 .quantity-selector input {
     width: 5rem;
     height: 5rem;
