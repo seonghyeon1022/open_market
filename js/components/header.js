@@ -1,7 +1,7 @@
 const headerHTML = `
     <section class="gnb__left">
         <h1 class="gnb__logo">
-            <a href="#">
+            <a href="/index.html">
                 <img src="./images/Logo-hodu.png" alt="HODU">
             </a>
         </h1>
