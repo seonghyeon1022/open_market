@@ -41,6 +41,9 @@ export function setupQuantityHandler(product) {
         totalPriceDisplay.textContent = unitPrice * quantity
         ? (unitPrice * quantity).toLocaleString('ko-KR')
         : '0';
+
+        plusBtn.disabled = quantity >= maxStock;
+        minusBtn.disabled = quantity <= 1;
     }
 
     /**
