@@ -13,7 +13,6 @@ function formatPrice(price) {
  * @returns {string} HTML 문자열
  */
 export function createProductMarkup(product) {
-    console.log(product);
     return `
     <section class="product-overview">
             <h2 class="sr-only">상품 상세페이지</h2>
