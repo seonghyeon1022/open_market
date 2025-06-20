@@ -18,7 +18,7 @@ function createProductCard(product) {
     return `
         <article class="product-card">
             <h3 class="sr-only">${product.name}</h3>
-            <a href="#none">
+            <a href="product.html?id=${product.id}">
                 <img src="${product.image}" alt="${product.name} 이미지">
                 <p class="product-card__brand">${product.seller.store_name}</p>
                 <h3 class="product-card__name">${product.info}</h3>
