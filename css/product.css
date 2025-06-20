@@ -213,7 +213,7 @@ main {
     border-bottom: 6px solid #E0E0E0;
 }
 
-.product-nav button:active {
+.product-nav button.active {
     border-bottom-color: #21BF48;
     color: #21BF48;
 }

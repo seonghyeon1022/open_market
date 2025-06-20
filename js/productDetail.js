@@ -41,6 +41,16 @@ async function init() {
 
     main.innerHTML = createProductMarkup(product);
     setupQuantityHandler(product);
+
+    const nav = document.querySelector('.product-nav');
+    const buttons = nav.querySelectorAll('button');
+    
+    buttons.forEach(button => {
+        button.addEventListener('click', () => {
+            buttons.forEach(btn => btn.classList.remove('active'));
+            button.classList.add('active');
+        });
+    });
 }
 
 document.addEventListener('DOMContentLoaded', init);
