@@ -63,6 +63,7 @@ body {
 
 .gnb__search-form input {
     border: none;
+    outline: none;
     font-size: 1.6rem;
 }
 
