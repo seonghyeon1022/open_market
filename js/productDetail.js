@@ -1,5 +1,6 @@
 import { ENDPOINT } from './api/config.js';
 import { createProductMarkup } from './components/productDetailView.js';
+import { setupQuantityHandler } from './components/quantitySelector.js';
 
 const productId = new URLSearchParams(window.location.search).get('id');
 const main = document.querySelector('.product-detail');
@@ -39,6 +40,7 @@ async function init() {
     }
 
     main.innerHTML = createProductMarkup(product);
+    setupQuantityHandler(product);
 }
 
 document.addEventListener('DOMContentLoaded', init);
