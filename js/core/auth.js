@@ -1,4 +1,4 @@
-import { ENDPOINT } from './api/config.js';
+import { ENDPOINT } from '../api/config.js';
 import { getAuthData, saveAuthData, clearAuthData } from './storage.js';
 
 /**
