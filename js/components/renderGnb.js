@@ -1,5 +1,6 @@
 // components/renderHeader.js
 import { isLoggedIn } from '../core/auth.js';
+import { setupMypageIconToggle } from './headerIconToggle.js';
 
 export function renderHeader() {
     const loggedIn = isLoggedIn();
@@ -7,8 +8,8 @@ export function renderHeader() {
     const loginOrMypageMarkup = loggedIn
         ? `
             <li class="gnb__menu-item">
-                <a href="./mypage.html">
-                    <img src="./images/icon-user.svg" alt="마이페이지">
+                <a href="#none" id="mypage-link">
+                    <img src="./images/icon-user.svg" alt="마이페이지" id="mypage-icon">
                     <span>마이페이지</span>
                 </a>
             </li>
@@ -50,5 +51,10 @@ export function renderHeader() {
         </nav>
     `;
 
-    document.querySelector('#gnb-header').innerHTML = headerHTML;
+    const gnbHeader = document.querySelector('#gnb-header');
+    gnbHeader.innerHTML = headerHTML;
+
+    if (loggedIn) {
+        setupMypageIconToggle();
+    }
 }
