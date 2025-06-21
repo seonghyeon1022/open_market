@@ -1,6 +1,7 @@
 import { ENDPOINT } from './api/config.js';
 import { createProductMarkup } from './components/productDetailView.js';
 import { setupQuantityHandler } from './components/quantitySelector.js';
+import { setupLoginModalOnButtons } from './handlers/loginModalHandler.js';
 
 const productId = new URLSearchParams(window.location.search).get('id');
 const main = document.querySelector('.product-detail');
@@ -41,6 +42,8 @@ async function init() {
 
     main.innerHTML = createProductMarkup(product);
     setupQuantityHandler(product);
+
+    setupLoginModalOnButtons('.add-to-cart', '.wishlist');
 
     const nav = document.querySelector('.product-nav');
     const buttons = nav.querySelectorAll('button');

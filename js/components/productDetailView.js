@@ -61,7 +61,7 @@ export function createProductMarkup(product) {
 
                     <section class="action-buttons">
                         <h2 class="sr-only">구매, 장바구니 버튼</h2>
-                        <button type="submit" class="add-to-cart">바로 구매</button>
+                        <button type="button" class="add-to-cart">바로 구매</button>
                         <button type="button" class="wishlist">장바구니</button>
                     </section>
                 </form>
@@ -79,7 +79,7 @@ export function createProductMarkup(product) {
 
         <dialog id="login-confirm-modal">
             <form method="dialog">
-                <button class="modal-close" value="cancel">
+                <button type="submit" class="modal-close" value="cancel">
                     <img src="./images/icon-delete.svg" alt="로그인 모달 닫기">
                 </button>
 

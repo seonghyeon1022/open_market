@@ -29,6 +29,7 @@ async function fetchProducts() {
     }
 }
 
+
 /**
  * 상품 목록 로드 및 렌더링
  */
