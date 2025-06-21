@@ -18,11 +18,16 @@ export function showLoginModalIfNeeded() {
         return;
     }
 
-    modal.addEventListener(
-        'close',
-        () => resolve(modal.returnValue === 'yes'),
-        { once: true }
-    );
+    function onClickOutside(e) {
+        if (e.target === modal) modal.close('cancel');
+    }
+
+    function onClose() {
+        resolve(modal.returnValue === 'yes');
+    }
+
+    modal.addEventListener('click', onClickOutside, { once: true });
+    modal.addEventListener('close', onClose, { once: true });
 
     modal.showModal();
     });
