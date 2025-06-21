@@ -76,5 +76,29 @@ export function createProductMarkup(product) {
                 <li><button>반품/교환정보</button></li>
             </ul>
         </nav>
+
+        <dialog id="login-confirm-modal">
+            <form method="dialog">
+                <button class="modal-close" value="cancel">
+                    <img src="./images/icon-delete.svg" alt="로그인 모달 닫기">
+                </button>
+
+                <main class="modal-message">
+                    <p>
+                        로그인이 필요한 서비스입니다.<br>
+                        로그인 하시겠습니까?
+                    </p>
+                </main>
+
+                <footer class="modal-actions">
+                    <button type="submit" class="btn btn-cancel"    value="no">
+                        아니오
+                    </button>
+                    <button type="submit" class="btn btn-confirm" value="yes">
+                        예
+                    </button>
+                </footer>
+            </form>
+        </dialog>
     `;
 }
