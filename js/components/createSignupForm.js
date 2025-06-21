@@ -49,21 +49,6 @@ export function createSignupForm() {
                     </div>
                 </fieldset>
 
-                ${type === 'seller' ? `
-                    ${createFieldset({
-                        id: 'businessNumber',
-                        label: '사업자 등록번호',
-                        type: 'text',
-                        extraHTML: `<button type="button" class="verify-btn">인증</button>`
-                    })}
-
-                    ${createFieldset({
-                        id: 'storeName',
-                        label: '스토어 이름',
-                        type: 'text'
-                    })}
-                    ` : ''}
-
                 <fieldset class="form-group">
                     <div class="checkbox-wrapper">
                         <input type="checkbox" id="terms" name="terms">
