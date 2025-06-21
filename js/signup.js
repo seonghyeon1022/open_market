@@ -1,4 +1,8 @@
 import { ENDPOINT } from './api/config.js';
+import { createSignupForm } from './components/createSignupForm.js';
+
+const signupMain = document.getElementById('signup-main');
+signupMain.appendChild(createSignupForm());
 
 const tabItems = document.querySelectorAll('.sign__tab-item');
 const userIdInput = document.querySelector('#userId');
