@@ -1,6 +1,6 @@
 import { ENDPOINT } from './api/config.js';
 import { createProductMarkup } from './components/productDetailView.js';
-import { setupQuantityHandler } from './components/quantitySelector.js';
+import { setupQuantityHandler } from './components/quantitySelectorHandler.js';
 import { setupLoginModalOnButtons } from './handlers/loginModalHandler.js';
 
 const productId = new URLSearchParams(window.location.search).get('id');
