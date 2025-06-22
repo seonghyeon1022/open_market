@@ -1,3 +1,7 @@
+/**
+ * 회원가입 폼을 생성하여 반환합니다.
+ * @returns {HTMLElement} 생성된 회원가입 폼을 포함한 main 요소
+ */
 export function createSignupForm() {
     const main = document.createElement('main');
 
@@ -66,6 +70,16 @@ export function createSignupForm() {
     return main;
 }
 
+/**
+ * 필드셋(입력폼 그룹) 마크업을 생성합니다.
+ * @param {Object} params - 필드셋 생성 옵션
+ * @param {string} params.id - input 요소의 id 및 name 속성 값
+ * @param {string} params.label - 필드셋 라벨 텍스트
+ * @param {string} params.type - input 타입 (e.g. text, password, tel 등)
+ * @param {string} [params.extraHTML=''] - input 옆에 추가할 HTML (예: 버튼)
+ * @param {boolean} [params.img=false] - 비밀번호 입력창의 체크 아이콘 포함 여부
+ * @returns {string} 필드셋 HTML 문자열
+ */
 function createFieldset({ id, label, type, extraHTML = '', img = false }) {
     const wrapperClass = img ? 'input-wrapper pw' : 'input-wrapper';
     const imgHTML = img ? `<img src="./images/icon-check-off.svg" alt="" class="password-check">` : '';
