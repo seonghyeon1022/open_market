@@ -1,4 +1,3 @@
-// components/renderHeader.js
 import { isLoggedIn } from '../core/auth.js';
 import { setupMypageIconToggle } from './mypageDropdown.js.js';
 

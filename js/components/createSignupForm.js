@@ -1,4 +1,3 @@
-// components/createSignupForm.js
 export function createSignupForm() {
     const main = document.createElement('main');
 
