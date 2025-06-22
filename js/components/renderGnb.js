@@ -1,6 +1,6 @@
 // components/renderHeader.js
 import { isLoggedIn } from '../core/auth.js';
-import { setupMypageIconToggle } from './headerIconToggle.js';
+import { setupMypageIconToggle } from './mypageDropdown.js.js';
 
 export function renderHeader() {
     const loggedIn = isLoggedIn();
@@ -12,6 +12,10 @@ export function renderHeader() {
                     <img src="./images/icon-user.svg" alt="마이페이지" id="mypage-icon">
                     <span>마이페이지</span>
                 </a>
+                <div class="mypage-dropdown" id="mypage-dropdown">
+                    <a href="#none" class="mypage-dropdown__item">마이페이지</a>
+                    <a href="#none" class="mypage-dropdown__item" id="logout-btn">로그아웃</a>
+                </div>
             </li>
         `
         : `
@@ -41,7 +45,7 @@ export function renderHeader() {
         <nav class="gnb__right">
             <ul class="gnb__menu">
                 <li class="gnb__menu-item">
-                    <a href="./cart.html">
+                    <a href="#none">
                         <img src="./images/icon-shopping-cart.svg" alt="장바구니">
                         <span>장바구니</span>
                     </a>
